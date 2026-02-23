@@ -22,4 +22,8 @@ export default defineConfig({
   resolve: {
     alias: parseTsConfigPaths(tsconfig.compilerOptions.paths),
   },
+  server: {
+    host: true,
+    allowedHosts: ['sketchily-fortuitous-phoebe.cloudpub.ru'],
+  },
 })

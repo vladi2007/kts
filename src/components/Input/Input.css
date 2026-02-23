@@ -1,0 +1,43 @@
+
+
+.wrapper.input-disabled {
+  background-color: #ffffff;
+  color: #e0e0e0;
+  cursor: not-allowed;
+}
+.wrapper{
+  border-radius: 10px;
+ 
+}
+.wrapper:focus-within {
+    box-sizing: border-box;
+  border: 1px solid #B5460F;
+
+}
+input::placeholder {
+  color: var(--text-secondary);
+}
+
+.input{  border-radius: 1px !important;
+      border-radius: 21px;
+  outline: none;
+    padding: 0 var(--spacing-m);
+    padding-right: calc(var(--spacing-m) + 20px);
+}
+.slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+
+.input::placeholder {
+  color: var(--text-secondary);
+}
+
+.input:disabled {
+  background-color: #ffffff;
+  color: rgba(175, 173, 181, 1);
+  opacity: 0.6;
+}

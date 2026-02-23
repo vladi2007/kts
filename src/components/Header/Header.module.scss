@@ -1,0 +1,49 @@
+$mobile: 375px;
+$tablet: 768px;
+$laptop: 1024px;
+$desktop: 1440px;
+
+.header {
+  background-color: #ffffff;
+  &__container {
+    display: flex;
+    align-items: center;
+    height: 64px;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 16px;;
+ 
+    > * {
+      white-space: nowrap;
+    }
+  }
+  &__logo {
+    height: 36px;
+    gap: 20px;
+    &-img {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  &__nav {
+    margin-left: 80px;
+    gap: 16px;
+    @media (max-width: $tablet) {
+      display: none !important;
+    }
+  }
+  &__profile {
+    margin-left: auto;
+    gap: 17px;
+  }
+  &__logo,
+  &__nav,
+  &__profile {
+    > * {
+      cursor: pointer;
+    }
+    display: flex;
+    align-items: center;
+  }
+}

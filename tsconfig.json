@@ -10,6 +10,7 @@
     "paths": {
       "components": ["components/*"],
       "config": ["config/*"],
+      "assets":["assets/*"],
       "styles": ["styles/*"],
       "utils": ["utils/*"]
     }
