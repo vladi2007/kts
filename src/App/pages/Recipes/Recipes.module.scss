@@ -1,0 +1,64 @@
+@import url('styles/variables.css');
+.recipes {
+  max-width: 1440px;
+  margin: 0 auto;
+  &__body {
+    margin: 0 auto;
+    margin-top: 36px;
+    max-width: 1240px;
+  }
+  &__image {
+    width: 100%;
+    aspect-ratio: 1440/572;
+    background-color: aliceblue;
+  }
+  &__header {
+    text-align: center;
+  }
+  &__finder {
+    display: flex;
+    align-items: center;
+    margin-top: 48px;
+    height: 52px;
+    gap: 19px;
+
+    &_input {
+      flex: 1;
+      max-width: 1154px;
+    }
+    &_icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 52px;
+      background-color: var(--button-primary-bg);
+      width: 64px;
+    }
+  }
+
+  &__categories {
+    width: 300px;
+    height: 52px;
+    margin-top: 20px;
+    margin-left: auto;
+    @media (max-width: 768px) {
+      margin: 0 auto;
+      margin-top: 20px;
+    }
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 360px);
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 24px;
+    row-gap: 64px;
+    gap: 80px;
+    padding-bottom: 118px;
+
+    &_card {
+      width: 360px;
+    }
+  }
+}

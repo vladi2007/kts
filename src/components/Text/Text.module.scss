@@ -1,0 +1,74 @@
+@import 'styles/variables.css';
+
+.text {
+  color: rgba(0, 0, 0, 1);
+  font-family: 'Roboto', sans-serif;
+  text-align: left;
+  font-weight: 400;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  &__title {
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 48px;
+  }
+
+  &__button {
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  &__p-20 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  &__p-18 {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  &__p-16 {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  &__p-14 {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  &__p-12 {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  &__p-10 {
+    font-size: 10px;
+    line-height: 14px;
+  }
+  &__weight-normal {
+    font-weight: normal;
+  }
+
+  &__weight-medium {
+    font-weight: 600;
+  }
+
+  &__weight-bold {
+    font-weight: bold;
+  }
+
+  &__color-primary {
+    color: var(--text-primary);
+  }
+
+  &__color-secondary {
+    color: var(--text-secondary);
+  }
+
+  &__color-accent {
+    color: var(--text-accent);
+  }
+}

@@ -1,0 +1,140 @@
+.recipe {
+  position: relative !important;
+  padding: 0 16px !important;
+  margin: 0 auto;
+
+  &__fonImage {
+    position: absolute;
+    top: 0px !important;
+    right: 0px;
+    z-index: 0; /* ниже всего контента */
+    pointer-events: none; /* клики проходят сквозь изображение */
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    max-width: 1258px;
+    margin: 0 auto;
+    padding-top: 48px;
+    position: relative;
+    z-index: 1; /* поверх фоновой картинки */
+    > img {
+      width: 32px;
+      height: 32px;
+    }
+  }
+  &__body {
+    margin: 0 auto;
+    margin-top: 36px;
+    max-width: 1240px;
+  }
+  &__desc {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 160px;
+    @media (max-width: 1024px) {
+      display: grid;
+      justify-content: center;
+      margin: 0 auto;
+      gap: 64px;
+    }
+    &_image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    &_stats {
+      width: 100% !important;
+      width: 463px;
+      max-width: 463px;
+      height: 146px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, auto);
+      row-gap: 50px;
+      justify-items: center;
+      align-items: center;
+    }
+    &_stat {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+
+      text-align: center;
+      display: flex !important;
+    }
+  }
+
+  &__summary {
+    padding: 36px;
+    background-color: #b5460f54;
+    margin-top: 48px;
+  }
+
+  &__stuff {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(1, 1fr);
+      gap: 16px;
+    }
+  }
+  &__equipment {
+    padding-left: 53px;
+
+    @media (max-width: 768px) {
+      padding-left: 0;
+    }
+  }
+
+  &__ingredients > div,
+  &__equipment > div {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 16px;
+    > div {
+      display: flex;
+      gap: 16px;
+      > img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  &__divider {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    img {
+      height: 100%;
+    }
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__directions {
+    margin-top: 48px;
+    padding-bottom: 53px;
+  }
+  &__steps {
+    margin-top: 24px;
+    display: grid;
+    gap: 16px;
+
+    > div {
+      display: grid;
+      gap: 4px;
+    }
+  }
+}

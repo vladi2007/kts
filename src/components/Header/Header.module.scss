@@ -1,0 +1,62 @@
+$mobile: 375px;
+$tablet: 768px;
+$laptop: 1024px;
+$desktop: 1440px;
+@import url('styles/variables.css');
+.header {
+  background-color: #ffffff;
+  &__container {
+    display: flex;
+    align-items: center;
+    height: 64px;
+    max-width: 1240px;
+    margin: 0 auto;
+    position: relative;
+    padding: 0 16px;
+    @media (max-width: 767px) {
+      flex-wrap: wrap; // разрешаем перенос дочерних блоков
+      height: auto; // чтобы контейнер подстраивался по высоте
+      padding: 8px 16px;
+    }
+    > * {
+      white-space: nowrap;
+    }
+  }
+  &__logo {
+    height: 36px;
+    gap: 20px;
+    &-img {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  &__nav {
+    margin-left: clamp(10px, calc(80 / 1440 * 100dvw), 80px);
+    gap: clamp(4px, calc(16 / 1440 * 100dvw), 16px);
+    @media (max-width: 767px) {
+      flex-wrap: wrap;
+      margin-left: 0px;
+      gap: 8px;
+      width: 100%;
+      justify-content: flex-start;
+
+      margin-top: 8px;
+    }
+  }
+  &__profile {
+    position: absolute;
+    top: 20px;
+    right: 0px;
+    gap: 17px;
+  }
+  &__logo,
+  &__nav,
+  &__profile {
+    > * {
+      cursor: pointer;
+    }
+    display: flex;
+    align-items: center;
+  }
+}
