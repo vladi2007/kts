@@ -1,6 +1,5 @@
-// components/icons/Icon.tsx
 import * as React from 'react';
-import '../../../styles/variables.css'
+import 'styles/variables.css';
 
 export type IconProps = React.SVGAttributes<SVGElement> & {
   className?: string;
@@ -17,9 +16,7 @@ const Icon: React.FC<React.PropsWithChildren<IconProps>> = ({
   stroke,
   ...props
 }) => {
-  const getColor = (
-    color?: 'primary' | 'secondary' | 'accent' | 'disabled'
-  ) => {
+  const getColor = (color?: 'primary' | 'secondary' | 'accent' | 'disabled') => {
     switch (color) {
       case 'primary':
         return 'var(--text-primary)';

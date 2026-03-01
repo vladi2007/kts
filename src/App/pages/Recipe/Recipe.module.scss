@@ -7,6 +7,8 @@
     position: absolute;
     top: 0px !important;
     right: 0px;
+    z-index: 0; /* ниже всего контента */
+    pointer-events: none; /* клики проходят сквозь изображение */
   }
 
   &__header {
@@ -16,7 +18,9 @@
     cursor: pointer;
     max-width: 1258px;
     margin: 0 auto;
-    padding-top:48px;
+    padding-top: 48px;
+    position: relative;
+    z-index: 1; /* поверх фоновой картинки */
     > img {
       width: 32px;
       height: 32px;
@@ -30,20 +34,22 @@
   &__desc {
     display: flex;
     align-items: center;
+    text-align: center;
     gap: 160px;
-     @media (max-width: 1024px) {
+    @media (max-width: 1024px) {
       display: grid;
       justify-content: center;
       margin: 0 auto;
       gap: 64px;
     }
     &_image {
-             max-width: 100%;
-        height: auto;
-    display: block;
+      max-width: 100%;
+      height: auto;
+      display: block;
     }
-   
-    &_stats {  width: 100% !important;
+
+    &_stats {
+      width: 100% !important;
       width: 463px;
       max-width: 463px;
       height: 146px;
@@ -51,15 +57,18 @@
       grid-template-columns: repeat(3, 1fr);
       grid-template-rows: repeat(2, auto);
       row-gap: 50px;
+      justify-items: center;
+      align-items: center;
     }
     &_stat {
-      display: grid;
+      display: flex;
+      flex-direction: column;
       justify-content: center;
-      margin: 0 auto;
+      align-items: center;
       gap: 8px;
-      width: 83px;
-      height: 48px;
+
       text-align: center;
+      display: flex !important;
     }
   }
 
@@ -82,7 +91,7 @@
     padding-left: 53px;
 
     @media (max-width: 768px) {
-      padding-left: 0; // на мобильных убираем отступ
+      padding-left: 0;
     }
   }
 
@@ -105,27 +114,27 @@
   &__divider {
     display: flex;
     justify-content: center;
-    align-items: stretch; // растянуть по высоте
+    align-items: stretch;
     img {
-      height: 100%; // чтобы вертикальная линия тянулась на всю высоту
+      height: 100%;
     }
     @media (max-width: 768px) {
-      display: none; // скрываем на мобильных
+      display: none;
     }
   }
 
-  &__directions{
-    margin-top: 48px;;
-        padding-bottom: 53px;;
+  &__directions {
+    margin-top: 48px;
+    padding-bottom: 53px;
   }
-  &__steps{
-    margin-top:24px;
+  &__steps {
+    margin-top: 24px;
     display: grid;
-    gap:16px;
+    gap: 16px;
 
-    > div{
-        display: grid;
-        gap:4px;
+    > div {
+      display: grid;
+      gap: 4px;
     }
   }
 }

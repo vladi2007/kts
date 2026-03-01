@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
+
 import Input from '../Input';
-import './MultiDropdown.css'
-import Text from '../Text/Text'
+import Text from '../Text';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
+
+import styles from './MultiDropdown.module.scss';
 export type Option = {
   /** Ключ варианта, используется для отправки на бек/использования в коде */
   key: string;
@@ -34,8 +36,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
   className,
   ...props
 }) => {
-  const isSelected = (option: Option) =>
-    value.some((v) => v.key === option.key);
+  const isSelected = (option: Option) => value.some((v) => v.key === option.key);
   const selectOption = (option: Option) => {
     if (disabled) return;
     if (isSelected(option)) return onChange(value.filter((v) => v.key != option.key));
@@ -62,7 +63,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
   }, [rootEl]);
 
   return (
-    <div style={{width:300, position:'relative'}} ref={rootEl} className={`${className}`}>
+    <div style={{ width: 300, position: 'relative' }} ref={rootEl} className={`${className}`}>
       <Input
         value={hasValue ? title : filter}
         disabled={disabled}
@@ -74,24 +75,43 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
         onClick={() => {
           if (!disabled) setIsOpen(true);
         }}
-         afterSlot={<ArrowDownIcon color="secondary" />}
+        afterSlot={<ArrowDownIcon color="secondary" />}
         {...props}
       />
       {isOpen && !disabled && (
-        <div className='options' style={{marginTop:8,  height:144, backgroundColor:'#FFFFFF', boxShadow:'0px 4px 10px 0px rgba(0, 0, 0, 0.25)'}}>
+        <div
+          className={styles.options}
+          style={{
+            marginTop: 8,
+            height: 144,
+            backgroundColor: '#FFFFFF',
+            boxShadow: '0px 4px 10px 0px rgba(0, 0, 0, 0.25)',
+          }}
+        >
           {filteredOptions.map((option) => {
-            const isSelected = value.some((v) => v.key === option.key);
-
+            const selected = isSelected(option);
             return (
               <div
                 key={option.key}
                 onClick={() => selectOption(option)}
-              
                 data-testid={`option-${option.key}`}
-                className='option'
-                style={{height:48, display:'flex', alignItems:'center', paddingLeft:'12px' ,width:'100%'}}
+                className={styles.option}
+                style={{
+                  height: 48,
+                  display: 'flex',
+                  alignItems: 'center',
+                  paddingLeft: '12px',
+                  width: '100%',
+                }}
               >
-                <Text view='p-16' weight='normal' color='primary'>{option.value}</Text>
+                <Text
+                  view="p-16"
+                  weight="normal"
+                  color={selected ? 'accent' : 'primary'}
+                  className={styles.optionText}
+                >
+                  {option.value}
+                </Text>
               </div>
             );
           })}

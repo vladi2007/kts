@@ -1,0 +1,73 @@
+@import url('styles/variables.css');
+.card {
+  display: flex;
+  flex-direction: column;
+
+  background-color: #ffff;
+  &:hover {
+    box-shadow: 0px 4px 10px 0px #00000040;
+  }
+  &__title {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    word-break: keep-all;
+    overflow-wrap: normal;
+  }
+  &__time {
+    display: flex;
+    align-items: center;
+  }
+  &__subtitle {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    word-break: keep-all;
+    overflow-wrap: normal;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+
+    padding: 0px var(--spacing-xs) 0px var(--spacing-xs);
+    gap: var(--spacing-xxs);
+    opacity: 0px;
+    flex: 1;
+  }
+  &__body {
+    padding-left: 12px;
+    padding-right: 12px;
+    display: flex;
+    flex-direction: column;
+    width: 336px;
+    padding-top: var(--spacing-large);
+  }
+  &__button {
+    padding-left: 12px;
+    display: flex;
+    justify-content: space-between;
+    width: 336px;
+    align-items: center;
+  }
+  &__image {
+    background-color: #d9d9d9;
+  }
+  &__footer {
+    margin-top: auto;
+    padding-left: 12px;
+    padding-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 24px;
+  }
+}
+
+.time {
+  &__icon {
+    width: 16px;
+    height: 16px;
+  }
+}

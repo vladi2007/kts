@@ -1,39 +1,39 @@
-import styles from './Header.module.scss';
+import useWindowWidth from 'hooks/UseWindowWidth';
+import { useNavigate } from 'react-router-dom';
+
 import Text from '../Text';
-import headerIcon from 'assets/icons/header_logo.svg';
-import headerRecipes from 'assets/icons/header_recipes.svg';
-import headerProfile from 'assets/icons/header_profile.svg';
-import { useState, useEffect } from 'react';
+
+import styles from './Header.module.scss';
+import headerIcon from './icons/header_logo.svg';
+import headerProfile from './icons/header_profile.svg';
+import headerRecipes from './icons/header_recipes.svg';
+
 const Header = () => {
-
-
- const useWindowWidth = () => {
-  const [width, setWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => setWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  return width;
-};
-
-const width = useWindowWidth();
-
-  // Определяем view в зависимости от ширины
-  const navView = width < 480 ? 'p-12' : width < 768 ? 'p-14' : 'p-16';
+  const width = useWindowWidth();
+  const navigate = useNavigate();
+  const navView = width < 480 ? 'p-10' : width < 768 ? 'p-14' : 'p-16';
   return (
     <div className={styles.header}>
       <div className={styles.header__container}>
-        <div className={styles.header__logo}>
-          <img src={headerIcon} className="header__logo-img"></img>
+        <div
+          className={styles.header__logo}
+          onClick={() => {
+            navigate('/');
+          }}
+        >
+          <img src={headerIcon} className="header__logo-img" />
           <Text view="p-20" weight="bold" color="primary" className="header__logo-text">
             Food Client
           </Text>
         </div>
+
         <div className={styles.header__nav}>
-          <Text view={navView} color="accent" className="header__nav-item">
+          <Text
+            view={navView}
+            color="accent"
+            className="header__nav-item"
+            onClick={() => navigate('/recipes')}
+          >
             Recipes
           </Text>
           <Text view={navView} color="primary" className="header__nav-item">
@@ -50,8 +50,8 @@ const width = useWindowWidth();
           </Text>
         </div>
         <div className={styles.header__profile}>
-          <img src={headerRecipes} className="header__profile-recipes"></img>
-          <img src={headerProfile} className="header__profile-profile"></img>
+          <img src={headerRecipes} className="header__profile-recipes" />
+          <img src={headerProfile} className="header__profile-profile" />
         </div>
       </div>
     </div>

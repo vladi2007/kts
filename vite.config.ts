@@ -26,4 +26,4 @@ export default defineConfig({
     host: true,
     allowedHosts: ['sketchily-fortuitous-phoebe.cloudpub.ru'],
   },
-})
+});

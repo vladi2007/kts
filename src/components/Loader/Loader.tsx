@@ -1,5 +1,6 @@
 import React from 'react';
-import './Loader.css';
+
+import styles from './Loader.module.scss';
 import loaderSvg from './loader.svg';
 
 export type LoaderProps = {
@@ -8,12 +9,14 @@ export type LoaderProps = {
 };
 
 const Loader: React.FC<LoaderProps> = ({ className = '', size = 'l' }) => {
+  const loaderClassName = [styles.loader, className, styles[size]].filter(Boolean).join(' ');
+  const imgClassName = [styles.loaderImg, styles[size]].filter(Boolean).join(' ');
+
   return (
-    <div className={`loader ${className} ${size}`}>
-      <img src={loaderSvg} className={`loader-img ${size}`} alt="loading" />
+    <div className={loaderClassName}>
+      <img src={loaderSvg} className={imgClassName} alt="loading" />
     </div>
   );
 };
-
 
 export default Loader;

@@ -1,9 +1,10 @@
 // config/routes.tsx
 
-import type { RouteObject } from "react-router";
-import App from '../App'
-import Recipes from "../App/pages/Recipes";
-import Recipe from '../App/pages/Recipe'
+import type { RouteObject } from 'react-router';
+
+import App from '../App';
+import Recipe from '../App/pages/Recipe';
+import Recipes from '../App/pages/Recipes';
 export const routesConfig: RouteObject[] = [
   {
     path: '/',
@@ -11,12 +12,12 @@ export const routesConfig: RouteObject[] = [
     children: [
       {
         path: '/recipes',
-        element: <Recipes />
+        element: <Recipes />,
       },
       {
         path: '/recipe/:id',
-        element: <Recipe />
-      }
-    ]
-  }
+        element: <Recipe />,
+      },
+    ],
+  },
 ];

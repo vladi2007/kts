@@ -1,0 +1,33 @@
+@import url('styles/variables.css');
+button {
+  font-weight: 400;
+  font-size: 18px;
+  color: white;
+  padding: 17px 20px;
+  line-height: 18px;
+  letter-spacing: 0%;
+  border-radius: 10px;
+  display: flex;
+  gap: 8px;
+  height: 52px;
+  align-items: center;
+  background-color: #b5460f;
+  border: #b5460f;
+
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+
+  &:hover {
+    background-color: #b5460fb2;
+    border: #b5460fb2;
+  }
+}
+
+.disabled {
+  background-color: #d9d9d9 !important;
+  border: #d9d9d9 !important;
+}
+.loading {
+  background-color: #518581 !important;
+  border: #518581 !important;
+}

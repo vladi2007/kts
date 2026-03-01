@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
-import './Card.css';
-import Text from '../Text/Text';
-import timeIcon from 'assets/icons/recipe_time_icon.svg';
+import React from 'react';
+
 import Button from '../Button';
+import Text from '../Text';
+
+import styles from './Card.module.scss';
+import timeIcon from './icons/recipe_time_icon.svg';
+
 export type CardProps = {
-  callories?:string;
+  callories?: string;
   className?: string;
 
   image: string;
@@ -21,6 +24,7 @@ export type CardProps = {
 
   actionSlot?: React.ReactNode;
 };
+
 const Card: React.FC<CardProps> = ({
   className,
   image,
@@ -30,30 +34,28 @@ const Card: React.FC<CardProps> = ({
   contentSlot,
   onClick,
   callories,
-  actionSlot,
 }) => (
-  <div className={`card ${className}`} onClick={onClick}>
-    <img src={image} alt="card-image" className="card-image" />
+  <div className={`${styles.card} ${className || ''}`} onClick={onClick}>
+    <img src={image} alt="card-image" className={styles.card__image} />
 
-    <div className="card-content">
-      <div className="card-body" style={{ gap: 8 }}>
+    <div className={styles.card__content}>
+      <div className={styles.card__body} style={{ gap: 8 }}>
         {captionSlot && (
           <Text className="padding-bottom" tag="p" color="secondary" view="p-14">
             {captionSlot}
           </Text>
         )}
         {subtitle && (
-          <div className="card_time">
-            <img className="time_icon" src={timeIcon} /> 
-        
+          <div className={styles.card__time}>
+            <img className={styles.time__icon} src={timeIcon} />
             <Text
               tag="p"
               data-testid="text"
-              className="card-subtitle "
+              className={styles.card__subtitle}
               color="secondary"
               view="p-16"
             >
-              {` ${subtitle}`}
+              {subtitle}
             </Text>
           </div>
         )}
@@ -61,7 +63,7 @@ const Card: React.FC<CardProps> = ({
           <Text
             tag="p"
             data-testid="text"
-            className="card-title padding-bottom"
+            className={`${styles.card__title} padding-bottom`}
             weight="bold"
             view="p-20"
             color="primary"
@@ -70,21 +72,22 @@ const Card: React.FC<CardProps> = ({
           </Text>
         )}
       </div>
-      <div className="card-button">
+      <div className={styles.card__button}>
         {contentSlot && (
           <Text tag="p" weight="normal" view="p-16" color="secondary">
             {contentSlot}
           </Text>
         )}
-        
       </div>
-         <div className='card-footer'>
-        <Text view="p-18" color='accent'>
+      <div className={styles.card__footer}>
+        <Text view="p-18" color="accent">
           {callories}
         </Text>
-        <Button onClick={(e) => {
-      e.stopPropagation(); 
-    }}>
+        <Button
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
           Save
         </Button>
       </div>
