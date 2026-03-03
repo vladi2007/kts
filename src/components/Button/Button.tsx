@@ -1,18 +1,27 @@
 import React from 'react';
 
 import Loader from '../Loader';
-import './Button.module.scss';
+
+import styles from './Button.module.scss';
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   loading?: boolean;
   children: React.ReactNode;
+  color?: 'primary' | 'secondary' | 'accent';
 };
 
-const Button: React.FC<ButtonProps> = ({ loading, children, className, disabled, ...props }) => {
-  const buttonClass = `${className} ${disabled ? 'disabled' : ''} ${loading && (disabled === undefined || disabled === false) ? 'loading' : ''}`;
+const Button: React.FC<ButtonProps> = ({
+  loading,
+  children,
+  className,
+  disabled,
+  color,
+  ...props
+}) => {
+  const buttonClass = `${className} ${styles.button} ${disabled ? 'disabled' : ''} ${loading && (disabled === undefined || disabled === false) ? 'loading' : ''}`;
   return (
     <button className={buttonClass} {...props} disabled={loading || disabled}>
-      {loading! && <Loader size="s" />}
-      {children}
+      {loading! && <Loader size="s" color={color!} />}
+      {!loading! && children}
     </button>
   );
 };
