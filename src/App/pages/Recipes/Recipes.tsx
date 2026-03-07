@@ -1,47 +1,54 @@
-import axios from 'axios';
-import Button from 'components/Button';
+import { useDebounce } from '@uidotdev/usehooks';
 import Card from 'components/Card';
 import Input from 'components/Input';
+import Loader from 'components/Loader';
 import MultiDropdown, { type Option } from 'components/MultiDropdown';
 import Text from 'components/Text';
-import { STRAPI_BASE_URL } from 'config/api.config';
 import useWindowWidth from 'hooks/UseWindowWidth';
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { type RecipeData, type Ingredient } from 'types/Recipes';
 
-import { CATEGORY_OPTIONS } from './Recipes.config';
+import { pageSize } from './Recipes.config';
 import styles from './Recipes.module.scss';
-import inputIcon from './icons/input_icon.svg';
+import Pagination from './components/Pagination';
+import { useRecipesFilters } from './hooks/useRecipesFilters';
+import { useCategoriesQuery, useRecipesQuery } from './hooks/useRecipesQuery';
 import recipesImage from './icons/recipes_image.svg';
-
 const Recipes = () => {
-  const [searchValue, setSearchValue] = useState('');
-  const [selectedCategories, setSelectedCategories] = useState<Option[]>([]);
-  const [recipes, setRecipes] = useState<RecipeData | null>(null);
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
   const width = useWindowWidth();
   const navView = width < 480 ? 'p-12' : width < 768 ? 'p-14' : 'p-20';
 
-  useEffect(() => {
-    // Запрос к Strapi
-    const fetchRecipes = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get<{ data: RecipeData[] }>(
-          `${STRAPI_BASE_URL}/recipes?populate[0]=images&populate[1]=ingradients`,
-          {}
-        );
+  const { data: categoriesData, isLoading: categoriesLoading } = useCategoriesQuery();
 
-        setRecipes(response.data.data);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchRecipes();
-  }, []);
+  const categoryOptions: Option[] = useMemo(
+    () =>
+      categoriesData?.map((c) => ({
+        value: c.title,
+        key: c.id,
+      })) || [],
+    [categoriesData]
+  );
+  const {
+    searchValue,
+    page,
+    selectedCategories,
+    handleSearchChange,
+    handleCategoriesChange,
+    handlePageChange,
+  } = useRecipesFilters(categoryOptions);
+  const searchParams = useDebounce(searchValue, 1000);
+  const selectedCategoryIds = useMemo(
+    () => selectedCategories.map((c) => c.key),
+    [selectedCategories]
+  );
+  const { data, isLoading } = useRecipesQuery({
+    search: searchParams,
+    page,
+    categories: selectedCategoryIds,
+    pageSize,
+  });
 
   return (
     <div className={styles.recipes}>
@@ -56,44 +63,59 @@ const Recipes = () => {
         <div className={styles.recipes__finder}>
           <Input
             value={searchValue}
-            onChange={(val: string) => setSearchValue(val)}
+            onChange={handleSearchChange}
             placeholder="Enter dishes"
             className={styles.recipes__finder_input}
           />
-          <Button>
-            <img src={inputIcon} alt="search" />
-          </Button>
         </div>
+        {!categoriesLoading ? (
+          <MultiDropdown
+            className={styles.recipes__categories}
+            options={categoryOptions}
+            value={selectedCategories}
+            onChange={handleCategoriesChange}
+            getTitle={(val: Option[]) =>
+              val.length > 0 ? val.map((v) => v.value).join(', ') : 'Categories'
+            }
+          />
+        ) : (
+          <div className={styles.recipes__categories}>
+            <Loader size="m" color="accent" />
+          </div>
+        )}
+        {!isLoading ? (
+          <>
+            <div className={styles.recipes__cards}>
+              {data?.recipes?.map((r: RecipeData) => {
+                const ingredients = r.ingradients
+                  .map((i: Ingredient) => `${i.unit} ${i.name}`)
+                  .join(' + ');
 
-        <MultiDropdown
-          className={styles.recipes__categories}
-          options={CATEGORY_OPTIONS}
-          value={selectedCategories}
-          onChange={(val: Option[]) => setSelectedCategories(val)}
-          getTitle={(val: Option[]) =>
-            val.length > 0 ? val.map((v) => v.value).join(', ') : 'Categories'
-          }
-        />
-        {!loading && (
+                return (
+                  <Card
+                    onClick={() => navigate(`/recipe/${r.documentId}`)}
+                    className={styles.recipes_cards_card}
+                    key={r.id}
+                    image={r.images[0]?.formats?.medium?.url}
+                    title={r.name}
+                    subtitle={` ${r.totalTime} min`}
+                    contentSlot={`${ingredients} `}
+                    callories={r.calories + ' kcal'}
+                    recipe={r}
+                  />
+                );
+              })}
+            </div>
+
+            <Pagination
+              currentPage={page}
+              pageCount={data?.meta.pagination.pageCount}
+              onPageChange={handlePageChange}
+            />
+          </>
+        ) : (
           <div className={styles.recipes__cards}>
-            {recipes?.map((r: RecipeData) => {
-              const ingredients = r.ingradients
-                .map((i: Ingredient) => `${i.unit} ${i.name}`)
-                .join(' + ');
-
-              return (
-                <Card
-                  onClick={() => navigate(`/recipe/${r.documentId}`)}
-                  className={styles.recipes_cards_card}
-                  key={r.id}
-                  image={r.images[0]?.formats?.medium?.url}
-                  title={r.name}
-                  subtitle={` ${r.totalTime} min`}
-                  contentSlot={`${ingredients} `}
-                  callories={r.calories + ' kcal'}
-                />
-              );
-            })}
+            <Loader size="l" color="accent" />
           </div>
         )}
       </div>

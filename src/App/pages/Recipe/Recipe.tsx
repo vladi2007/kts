@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Loader from 'components/Loader';
 import Text from 'components/Text';
 import { STRAPI_BASE_URL } from 'config/api.config';
 import useWindowWidth from 'hooks/UseWindowWidth';
@@ -38,7 +39,7 @@ const Recipe = () => {
   }, [id]);
   return (
     <>
-      {!loading && (
+      {!loading ? (
         <div className={styles.recipe}>
           <img className={styles.recipe__fonImage} src={recipeFonImage} />
           <div className={styles.recipe__header} onClick={() => navigate('/recipes')}>
@@ -144,6 +145,10 @@ const Recipe = () => {
               ))}
             </div>
           </div>
+        </div>
+      ) : (
+        <div className={styles.recipe__loader}>
+          <Loader size="xxl" color="accent" />
         </div>
       )}
     </>

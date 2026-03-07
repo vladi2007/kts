@@ -47,4 +47,17 @@ export type RecipeData = {
   ingradients: Ingredient[];
   equipments: Equipment[];
   directions: Direction[];
+  category: Category;
 };
+export type Category = {
+  id: number;
+  documentId: string;
+  title: string;
+  image?: Image;
+};
+export interface RecipesParams {
+  search?: string;
+  categories?: string[];
+  page?: number;
+  pageSize?: number;
+}

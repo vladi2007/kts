@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import styles from './Text.module.scss';
 
@@ -23,18 +23,22 @@ const Text: React.FC<TextProps> = ({
   maxLines,
   onClick,
 }) => {
-  const classes = [
-    styles.text,
-    view ? styles[`text__${view}`] : '',
-    weight ? styles[`text__weight-${weight}`] : '',
-    color ? styles[`text__color-${color}`] : '',
-    className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+  const classes = useMemo(
+    () =>
+      [
+        styles.text,
+        view ? styles[`text__${view}`] : '',
+        weight ? styles[`text__weight-${weight}`] : '',
+        color ? styles[`text__color-${color}`] : '',
+        className,
+      ]
+        .filter(Boolean)
+        .join(' '),
+    [view, weight, color, className]
+  );
 
-  const Component = tag;
-  const style = maxLines ? { WebkitLineClamp: maxLines } : undefined;
+  const Component = useMemo(() => tag, [tag]);
+  const style = useMemo(() => (maxLines ? { WebkitLineClamp: maxLines } : undefined), [maxLines]);
 
   return (
     <Component className={classes} style={style} onClick={onClick}>

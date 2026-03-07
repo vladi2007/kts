@@ -1,9 +1,12 @@
+@import url('styles/variables.scss');
+@import url('styles/colors.scss');
 .options {
   position: absolute;
   margin-top: 8px;
   left: 0;
   width: 100%;
   z-index: 999;
+  overflow-y: auto;
 }
 
 .option {
@@ -16,7 +19,7 @@
 
   &:hover {
     .optionText {
-      color: var(--text-secondary) !important;
+      color: var(--color-gray) !important;
     }
   }
 }

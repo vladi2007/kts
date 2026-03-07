@@ -1,0 +1,40 @@
+@import url('styles/variables.scss');
+@import url('styles/colors.scss');
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding-bottom: 28px;
+  justify-content: center;
+  > button {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.arrow {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.page {
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 0;
+  width: 38px;
+  height: 42px;
+  font-size: 18px;
+  &.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+}
