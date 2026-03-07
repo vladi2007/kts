@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import Input from '../Input';
 import Text from '../Text';
@@ -36,19 +36,26 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
   className,
   ...props
 }) => {
-  const isSelected = (option: Option) => value.some((v) => v.key === option.key);
-  const selectOption = (option: Option) => {
-    if (disabled) return;
-    if (isSelected(option)) return onChange(value.filter((v) => v.key != option.key));
-    else return onChange([...value, option]);
-  };
+  const isSelected = useCallback(
+    (option: Option) => value.some((v) => v.key === option.key),
+    [value]
+  );
+  const selectOption = useCallback(
+    (option: Option) => {
+      if (disabled) return;
+      if (isSelected(option)) return onChange(value.filter((v) => v.key != option.key));
+      else return onChange([...value, option]);
+    },
+    [disabled, value, isSelected, onChange]
+  );
   const [isOpen, setIsOpen] = useState(false);
   const [filter, setFilter] = useState('');
   const rootEl = useRef<HTMLDivElement>(null);
   const title = getTitle(value);
-  const hasValue = value.length > 0;
-  const filteredOptions = options.filter((option) =>
-    option.value.toLowerCase().includes(filter.toLowerCase())
+  const hasValue = useMemo(() => value.length > 0, [value]);
+  const filteredOptions = useMemo(
+    () => options.filter((option) => option.value.toLowerCase().includes(filter.toLowerCase())),
+    [options, filter]
   );
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

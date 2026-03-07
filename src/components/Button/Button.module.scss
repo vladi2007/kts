@@ -1,8 +1,9 @@
-@import url('styles/variables.css');
+@import url('styles/variables.scss');
+@import url('styles/colors.scss');
 .button {
   font-weight: 400;
   font-size: 18px;
-  color: white;
+  color: var(--color-white);
   padding: 17px 20px;
   line-height: 18px;
   letter-spacing: 0%;
@@ -11,23 +12,24 @@
   gap: 8px;
   height: 52px;
   align-items: center;
-  background-color: #b5460f;
-  border: #b5460f;
+  background-color: var(--color-primary);
+  border: var(--color-primary);
 
   cursor: pointer;
   font-family: 'Roboto', sans-serif;
 
   &:hover {
-    background-color: #b5460fb2;
-    border: #b5460fb2;
+    background-color: var(--color-primary-hover);
+    border: var(--color-primary-hover);
   }
 }
 
 .disabled {
-  background-color: #d9d9d9 !important;
-  border: #d9d9d9 !important;
+  background-color: var(--color-gray-light) !important;
+  border: var(--color-gray-light) !important;
 }
+
 .loading {
-  background-color: #518581 !important;
-  border: #518581 !important;
+  background-color: var(--color-loading) !important;
+  border: var(--color-loading) !important;
 }

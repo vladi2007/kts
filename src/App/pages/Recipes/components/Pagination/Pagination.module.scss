@@ -1,8 +1,11 @@
+@import url('styles/variables.scss');
+@import url('styles/colors.scss');
 .pagination {
   display: flex;
   align-items: center;
   gap: 15px;
   padding-bottom: 28px;
+  justify-content: center;
   > button {
     width: 32px;
     height: 32px;
@@ -31,7 +34,7 @@
   height: 42px;
   font-size: 18px;
   &.active {
-    background-color: #b5460f;
-    color: white;
+    background-color: var(--color-primary);
+    color: var(--color-white);
   }
 }

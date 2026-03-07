@@ -15,8 +15,6 @@ export const toggleRecipeStorage = (recipe: RecipeData): boolean => {
     const updated = recipes.filter((r) => r.id !== recipe.id);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
     return false;
-  } else {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify([...recipes, recipe]));
-    return true;
   }
+  return true;
 };

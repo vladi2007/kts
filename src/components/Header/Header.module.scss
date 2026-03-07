@@ -2,9 +2,10 @@ $mobile: 375px;
 $tablet: 768px;
 $laptop: 1024px;
 $desktop: 1440px;
-@import url('styles/variables.css');
+@import url('styles/variables.scss');
+@import url('styles/colors.scss');
 .header {
-  background-color: #ffffff;
+  background-color: var(--color-white);
   &__container {
     display: flex;
     align-items: center;

@@ -1,3 +1,5 @@
+@import url('styles/variables.scss');
+@import url('styles/colors.scss');
 .options {
   position: absolute;
   margin-top: 8px;
@@ -17,7 +19,7 @@
 
   &:hover {
     .optionText {
-      color: var(--text-secondary) !important;
+      color: var(--color-gray) !important;
     }
   }
 }

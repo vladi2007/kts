@@ -1,4 +1,5 @@
 import useWindowWidth from 'hooks/UseWindowWidth';
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Text from '../Text';
@@ -11,7 +12,7 @@ import headerRecipes from './icons/header_recipes.svg';
 const Header = () => {
   const width = useWindowWidth();
   const navigate = useNavigate();
-  const navView = width < 480 ? 'p-10' : width < 768 ? 'p-14' : 'p-16';
+  const navView = useMemo(() => (width < 480 ? 'p-10' : width < 768 ? 'p-14' : 'p-16'), [width]);
   return (
     <div className={styles.header}>
       <div className={styles.header__container}>

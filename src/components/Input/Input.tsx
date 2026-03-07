@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import styles from './Input.module.scss';
 export type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value'> & {
@@ -29,14 +29,18 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       backgroundColor: '#FFFFFF',
     };
 
-    const wrapperClassNames = [
-      styles.wrapper,
-      className,
-      disabled ? styles['wrapper__input-disabled'] : '',
-      value ? styles['input-not-empty'] : styles['input-empty'],
-    ]
-      .filter(Boolean)
-      .join(' ');
+    const wrapperClassNames = useMemo(
+      () =>
+        [
+          styles.wrapper,
+          className,
+          disabled ? styles['wrapper__input-disabled'] : '',
+          value ? styles['input-not-empty'] : styles['input-empty'],
+        ]
+          .filter(Boolean)
+          .join(' '),
+      [className, disabled, value]
+    );
     return (
       <div className={wrapperClassNames} style={{ ...wrapperStyle, position: 'relative' }}>
         <input

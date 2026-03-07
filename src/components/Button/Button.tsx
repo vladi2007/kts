@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import Loader from '../Loader';
 
@@ -17,11 +17,14 @@ const Button: React.FC<ButtonProps> = ({
   color,
   ...props
 }) => {
-  const buttonClass = `${className} ${styles.button} ${disabled ? 'disabled' : ''} ${loading && (disabled === undefined || disabled === false) ? 'loading' : ''}`;
+  const buttonClass = useMemo(
+    () =>
+      `${className} ${styles.button} ${disabled ? 'disabled' : ''} ${loading && (disabled === undefined || disabled === false) ? 'loading' : ''}`,
+    [className, loading, disabled]
+  );
   return (
     <button className={buttonClass} {...props} disabled={loading || disabled}>
-      {loading! && <Loader size="s" color={color!} />}
-      {!loading! && children}
+      {loading ? <Loader size="s" color={color} /> : children}
     </button>
   );
 };

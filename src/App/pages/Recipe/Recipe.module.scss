@@ -1,3 +1,5 @@
+@import url('styles/variables.scss');
+@import url('styles/colors.scss');
 .recipe {
   position: relative !important;
   padding: 0 16px !important;
@@ -26,7 +28,7 @@
     margin: 0 auto;
     padding-top: 48px;
     position: relative;
-    z-index: 1; /* поверх фоновой картинки */
+    z-index: 1;
     > img {
       width: 32px;
       height: 32px;
@@ -80,7 +82,7 @@
 
   &__summary {
     padding: 36px;
-    background-color: #b5460f54;
+    background-color: var(--color-primary-33);
     margin-top: 48px;
   }
 

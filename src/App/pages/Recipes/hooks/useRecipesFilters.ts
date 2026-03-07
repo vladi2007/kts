@@ -2,11 +2,7 @@ import { type Option } from 'components/MultiDropdown';
 import { useMemo, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-interface UseRecipesFiltersProps {
-  categoryOptions: Option[];
-}
-
-export const useRecipesFilters = ({ categoryOptions }: UseRecipesFiltersProps) => {
+export const useRecipesFilters = (categoryOptions: Option[]) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const searchValue = searchParams.get('search') || '';

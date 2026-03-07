@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import styles from './Loader.module.scss';
 
@@ -9,8 +9,14 @@ export type LoaderProps = {
 };
 
 const Loader: React.FC<LoaderProps> = ({ className = '', size = 'l', color }) => {
-  const loaderClassName = [styles.loader, className].filter(Boolean).join(' ');
-  const svgClassName = [styles.loaderImg, styles[size], styles[color!]].filter(Boolean).join(' ');
+  const loaderClassName = useMemo(
+    () => [styles.loader, className].filter(Boolean).join(' '),
+    [className]
+  );
+  const svgClassName = useMemo(
+    () => [styles.loaderImg, styles[size], styles[color!]].filter(Boolean).join(' '),
+    [color, size]
+  );
 
   return (
     <div className={loaderClassName} role="status" aria-live="polite" aria-label="Loading">

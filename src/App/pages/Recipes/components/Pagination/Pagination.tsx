@@ -3,26 +3,19 @@ import React from 'react';
 import styles from './Pagination.module.scss';
 import leftArrow from './icons/arrow-left.svg';
 import rightArrow from './icons/arrow-right.svg';
-
-type PaginationProps = {
-  currentPage: number;
-  pageCount: number;
-  onPageChange: (page: number) => void;
-};
+import { type PaginationProps } from './types/Paginiation';
 
 const Pagination: React.FC<PaginationProps> = ({ currentPage, pageCount, onPageChange }) => {
   if (pageCount <= 1) return null;
 
-  const getPageNumbers = () => {
-    const pages: (number | string)[] = [];
+  const getPages = () => {
+    const pages: number[] = [];
 
     for (let i = 1; i <= pageCount; i++) pages.push(i);
 
     return Array.from(new Set(pages));
   };
-
-  const pages = getPageNumbers();
-
+  const pages = getPages();
   return (
     <div className={styles.pagination}>
       <button
@@ -32,21 +25,15 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, pageCount, onPageC
         <img src={leftArrow} alt="prev" />
       </button>
       <div style={{ display: 'flex' }}>
-        {pages.map((p, idx) =>
-          typeof p === 'number' ? (
-            <button
-              key={idx}
-              className={`${styles.page} ${p === currentPage ? styles.active : ''}`}
-              onClick={() => onPageChange(p)}
-            >
-              {p}
-            </button>
-          ) : (
-            <span key={idx} className={styles.ellipsis}>
-              ...
-            </span>
-          )
-        )}
+        {pages.map((p, idx) => (
+          <button
+            key={idx}
+            className={`${styles.page} ${p === currentPage ? styles.active : ''}`}
+            onClick={() => onPageChange(p)}
+          >
+            {p}
+          </button>
+        ))}
       </div>
       <button
         className={`${styles.arrow} ${currentPage === pageCount ? styles.disabled : ''}`}

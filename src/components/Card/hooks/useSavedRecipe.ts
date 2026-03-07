@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import type { RecipeData } from 'types/Recipes';
 
 import { getSavedRecipes, toggleRecipeStorage } from '../utils/savedRecipes';
@@ -11,10 +11,10 @@ export const useSavedRecipe = (recipe: RecipeData) => {
     setIsSaved(saved);
   }, [recipe.id]);
 
-  const toggleSaved = () => {
+  const toggleSaved = useCallback(() => {
     const newState = toggleRecipeStorage(recipe);
     setIsSaved(newState);
-  };
+  }, [recipe]);
 
   return {
     isSaved,

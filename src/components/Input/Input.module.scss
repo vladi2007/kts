@@ -1,19 +1,21 @@
+@import url('styles/variables.scss');
+@import url('styles/colors.scss');
 .wrapper {
   border-radius: 10px;
   &__input-disabled {
-    background-color: #ffffff;
-    color: #e0e0e0;
+    background-color: var(--color-white);
+    color: var(--color-gray-disabled);
     cursor: not-allowed;
   }
   &:focus-within {
     box-sizing: border-box;
-    border: 1px solid #b5460f;
+    border: 1px solid var(--color-primary);
   }
 }
 
 input {
   &::placeholder {
-    color: var(--text-secondary);
+    color: var(--color-gray);
   }
 }
 
@@ -24,14 +26,15 @@ input {
   padding: 0 var(--spacing-m);
   padding-right: calc(var(--spacing-m) + 20px);
   &::placeholder {
-    color: var(--text-secondary);
+    color: var(--color-gray);
   }
   &:disabled {
-    background-color: #ffffff;
-    color: rgba(175, 173, 181, 1);
+    background-color: var(--color-white);
+    color: var(--color-gray);
     opacity: 0.6;
   }
 }
+
 .slot {
   display: flex;
   align-items: center;

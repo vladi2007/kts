@@ -1,18 +1,19 @@
-import Button from 'components/Button';
+import { useDebounce } from '@uidotdev/usehooks';
 import Card from 'components/Card';
 import Input from 'components/Input';
 import Loader from 'components/Loader';
 import MultiDropdown, { type Option } from 'components/MultiDropdown';
 import Text from 'components/Text';
 import useWindowWidth from 'hooks/UseWindowWidth';
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { type RecipeData, type Ingredient } from 'types/Recipes';
 
+import { pageSize } from './Recipes.config';
 import styles from './Recipes.module.scss';
 import Pagination from './components/Pagination';
 import { useRecipesFilters } from './hooks/useRecipesFilters';
 import { useCategoriesQuery, useRecipesQuery } from './hooks/useRecipesQuery';
-import inputIcon from './icons/input_icon.svg';
 import recipesImage from './icons/recipes_image.svg';
 const Recipes = () => {
   const navigate = useNavigate();
@@ -20,12 +21,15 @@ const Recipes = () => {
   const navView = width < 480 ? 'p-12' : width < 768 ? 'p-14' : 'p-20';
 
   const { data: categoriesData, isLoading: categoriesLoading } = useCategoriesQuery();
-  const pageSize = 9;
-  const categoryOptions: Option[] =
-    categoriesData?.map((c) => ({
-      value: c.title,
-      key: c.id,
-    })) || [];
+
+  const categoryOptions: Option[] = useMemo(
+    () =>
+      categoriesData?.map((c) => ({
+        value: c.title,
+        key: c.id,
+      })) || [],
+    [categoriesData]
+  );
   const {
     searchValue,
     page,
@@ -33,11 +37,14 @@ const Recipes = () => {
     handleSearchChange,
     handleCategoriesChange,
     handlePageChange,
-  } = useRecipesFilters({ categoryOptions });
-
-  const selectedCategoryIds = selectedCategories.map((c) => c.key);
+  } = useRecipesFilters(categoryOptions);
+  const searchParams = useDebounce(searchValue, 1000);
+  const selectedCategoryIds = useMemo(
+    () => selectedCategories.map((c) => c.key),
+    [selectedCategories]
+  );
   const { data, isLoading } = useRecipesQuery({
-    search: searchValue,
+    search: searchParams,
     page,
     categories: selectedCategoryIds,
     pageSize,
@@ -60,9 +67,6 @@ const Recipes = () => {
             placeholder="Enter dishes"
             className={styles.recipes__finder_input}
           />
-          <Button loading={isLoading} color="primary">
-            <img src={inputIcon} alt="search" />
-          </Button>
         </div>
         {!categoriesLoading ? (
           <MultiDropdown
@@ -80,7 +84,7 @@ const Recipes = () => {
           </div>
         )}
         {!isLoading ? (
-          <div>
+          <>
             <div className={styles.recipes__cards}>
               {data?.recipes?.map((r: RecipeData) => {
                 const ingredients = r.ingradients
@@ -102,14 +106,13 @@ const Recipes = () => {
                 );
               })}
             </div>
-            <div className={styles.recipes__pagination}>
-              <Pagination
-                currentPage={page}
-                pageCount={data?.meta.pagination.pageCount}
-                onPageChange={handlePageChange}
-              />
-            </div>
-          </div>
+
+            <Pagination
+              currentPage={page}
+              pageCount={data?.meta.pagination.pageCount}
+              onPageChange={handlePageChange}
+            />
+          </>
         ) : (
           <div className={styles.recipes__cards}>
             <Loader size="l" color="accent" />

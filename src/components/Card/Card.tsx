@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import type { RecipeData } from 'types/Recipes';
 
 import Button from '../Button';
@@ -41,12 +41,16 @@ const Card: React.FC<CardProps> = ({
 }) => {
   const { isSaved, toggleSaved } = useSavedRecipe(recipe);
 
-  const handleSave = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    toggleSaved();
-  };
+  const handleSave = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      toggleSaved();
+    },
+    [toggleSaved]
+  );
+  const classnames = useMemo(() => `${styles.card} ${className || ''}`, [className]);
   return (
-    <div className={`${styles.card} ${className || ''}`} onClick={onClick}>
+    <div className={classnames} onClick={onClick}>
       <img src={image} alt="card-image" className={styles.card__image} />
 
       <div className={styles.card__content}>
