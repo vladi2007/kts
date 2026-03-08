@@ -8,13 +8,13 @@ export type LoaderProps = {
   color?: 'primary' | 'secondary' | 'accent';
 };
 
-const Loader: React.FC<LoaderProps> = ({ className = '', size = 'l', color }) => {
+const Loader: React.FC<LoaderProps> = ({ className = '', size = 'l', color = 'primary' }) => {
   const loaderClassName = useMemo(
     () => [styles.loader, className].filter(Boolean).join(' '),
     [className]
   );
   const svgClassName = useMemo(
-    () => [styles.loaderImg, styles[size], styles[color!]].filter(Boolean).join(' '),
+    () => [styles.loaderImg, styles[size], styles[color]].filter(Boolean).join(' '),
     [color, size]
   );
 

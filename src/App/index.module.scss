@@ -1,5 +1,5 @@
-@import url('styles/variables.scss');
-@import url('styles/colors.scss');
+@use 'styles/variables';
+@use 'styles/colors';
 body,
 html,
 * {
@@ -9,8 +9,6 @@ html,
 }
 
 body {
-  background-color: var(--color-body-22);
-}
-body {
+  background-color: colors.$color-body-22;
   font-family: 'Roboto', sans-serif;
 }

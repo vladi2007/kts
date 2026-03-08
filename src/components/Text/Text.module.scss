@@ -1,7 +1,8 @@
-@import url('styles/variables.scss');
-@import url('styles/colors.scss');
+@use 'styles/variables';
+@use 'styles/colors';
+
 .text {
-  color: var(--color-black);
+  color: colors.$color-black;
   font-family: 'Roboto', sans-serif;
   text-align: left;
   font-weight: 400;
@@ -44,10 +45,12 @@
     font-size: 12px;
     line-height: 16px;
   }
+
   &__p-10 {
     font-size: 10px;
     line-height: 14px;
   }
+
   &__weight-normal {
     font-weight: normal;
   }
@@ -61,14 +64,14 @@
   }
 
   &__color-primary {
-    color: var(--color-black);
+    color: colors.$color-black;
   }
 
   &__color-secondary {
-    color: var(--color-gray);
+    color: colors.$color-gray;
   }
 
   &__color-accent {
-    color: var(--color-primary);
+    color: colors.$color-primary;
   }
 }

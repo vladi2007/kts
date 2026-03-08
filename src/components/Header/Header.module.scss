@@ -2,10 +2,10 @@ $mobile: 375px;
 $tablet: 768px;
 $laptop: 1024px;
 $desktop: 1440px;
-@import url('styles/variables.scss');
-@import url('styles/colors.scss');
+@use 'styles/variables';
+@use 'styles/colors';
 .header {
-  background-color: var(--color-white);
+  background-color: colors.$color-white;
   &__container {
     display: flex;
     align-items: center;
@@ -48,7 +48,7 @@ $desktop: 1440px;
   &__profile {
     position: absolute;
     top: 20px;
-    right: 0px;
+    right: variables.$spacing-medium;
     gap: 17px;
   }
   &__logo,

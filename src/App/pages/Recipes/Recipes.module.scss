@@ -1,8 +1,9 @@
-@import url('styles/variables.scss');
-@import url('styles/colors.scss');
+@use 'styles/variables';
+@use 'styles/colors';
 .recipes {
   max-width: 1440px;
   margin: 0 auto;
+  padding: 0 variables.$spacing-medium;
   &__body {
     margin: 0 auto;
     margin-top: 36px;
@@ -30,7 +31,7 @@
       align-items: center;
       justify-content: center;
       height: 52px;
-      background-color: var(--color-primary);
+      background-color: colors.$color-primary;
       width: 64px;
     }
   }

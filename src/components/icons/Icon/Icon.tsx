@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useMemo } from 'react';
-import 'styles/variables.scss';
+import 'styles/colors.scss';
 
 export type IconProps = React.SVGAttributes<SVGElement> & {
   className?: string;

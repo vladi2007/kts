@@ -16,5 +16,6 @@ export const toggleRecipeStorage = (recipe: RecipeData): boolean => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
     return false;
   }
+  localStorage.setItem(STORAGE_KEY, JSON.stringify([...recipes, recipe]));
   return true;
 };

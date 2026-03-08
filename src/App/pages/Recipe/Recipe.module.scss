@@ -1,5 +1,5 @@
-@import url('styles/variables.scss');
-@import url('styles/colors.scss');
+@use 'styles/variables';
+@use 'styles/colors';
 .recipe {
   position: relative !important;
   padding: 0 16px !important;
@@ -82,7 +82,7 @@
 
   &__summary {
     padding: 36px;
-    background-color: var(--color-primary-33);
+    background-color: colors.$color-primary-33;
     margin-top: 48px;
   }
 

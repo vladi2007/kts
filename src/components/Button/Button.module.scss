@@ -1,9 +1,9 @@
-@import url('styles/variables.scss');
-@import url('styles/colors.scss');
+@use 'styles/variables';
+@use 'styles/colors';
 .button {
   font-weight: 400;
   font-size: 18px;
-  color: var(--color-white);
+  color: colors.$color-white;
   padding: 17px 20px;
   line-height: 18px;
   letter-spacing: 0%;
@@ -12,24 +12,24 @@
   gap: 8px;
   height: 52px;
   align-items: center;
-  background-color: var(--color-primary);
-  border: var(--color-primary);
+  background-color: colors.$color-primary;
+  border: colors.$color-primary;
 
   cursor: pointer;
   font-family: 'Roboto', sans-serif;
 
   &:hover {
-    background-color: var(--color-primary-hover);
-    border: var(--color-primary-hover);
+    background-color: colors.$color-primary-hover;
+    border: colors.$color-primary-hover;
   }
 }
 
 .disabled {
-  background-color: var(--color-gray-light) !important;
-  border: var(--color-gray-light) !important;
+  background-color: colors.$color-gray-light !important;
+  border: colors.$color-gray-light !important;
 }
 
 .loading {
-  background-color: var(--color-loading) !important;
-  border: var(--color-loading) !important;
+  background-color: colors.$color-loading !important;
+  border: colors.$color-loading !important;
 }

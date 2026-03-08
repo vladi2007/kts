@@ -1,5 +1,5 @@
-@import url('styles/variables.scss');
-@import url('styles/colors.scss');
+@use 'styles/variables';
+@use 'styles/colors';
 .pagination {
   display: flex;
   align-items: center;
@@ -34,7 +34,7 @@
   height: 42px;
   font-size: 18px;
   &.active {
-    background-color: var(--color-primary);
-    color: var(--color-white);
+    background-color: as colors.$color-primary;
+    color: colors.$color-white;
   }
 }

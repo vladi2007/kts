@@ -1,5 +1,5 @@
-@import url('styles/variables.scss');
-@import url('styles/colors.scss');
+@use 'styles/variables';
+@use 'styles/colors';
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -49,8 +49,8 @@
   color: white;
 }
 .secondary {
-  color: var(--color-gray);
+  color: colors.$color-gray;
 }
 .accent {
-  color: var(--color-primary);
+  color: colors.$color-primary;
 }
