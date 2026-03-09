@@ -1,11 +1,12 @@
-@import url('styles/variables.css');
+@use 'styles/variables';
+@use 'styles/colors';
 .card {
   display: flex;
   flex-direction: column;
 
-  background-color: #ffff;
+  background-color: colors.$color-white;
   &:hover {
-    box-shadow: 0px 4px 10px 0px #00000040;
+    box-shadow: 0px 4px 10px 0px colors.$color-black-25;
   }
   &__title {
     overflow: hidden;
@@ -31,8 +32,7 @@
     display: flex;
     flex-direction: column;
 
-    padding: 0px var(--spacing-xs) 0px var(--spacing-xs);
-    gap: var(--spacing-xxs);
+    gap: variables.$spacing-xxs;
     opacity: 0px;
     flex: 1;
   }
@@ -42,7 +42,7 @@
     display: flex;
     flex-direction: column;
     width: 336px;
-    padding-top: var(--spacing-large);
+    padding-top: variables.$spacing-large;
   }
   &__button {
     padding-left: 12px;
@@ -52,7 +52,7 @@
     align-items: center;
   }
   &__image {
-    background-color: #d9d9d9;
+    background-color: colors.$color-gray-light;
   }
   &__footer {
     margin-top: auto;

@@ -1,14 +1,22 @@
+@use 'styles/variables';
+@use 'styles/colors';
 .recipe {
   position: relative !important;
   padding: 0 16px !important;
   margin: 0 auto;
-
+  &__loader {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   &__fonImage {
     position: absolute;
     top: 0px !important;
     right: 0px;
-    z-index: 0; /* ниже всего контента */
-    pointer-events: none; /* клики проходят сквозь изображение */
+    z-index: 0;
+    pointer-events: none;
   }
 
   &__header {
@@ -20,7 +28,7 @@
     margin: 0 auto;
     padding-top: 48px;
     position: relative;
-    z-index: 1; /* поверх фоновой картинки */
+    z-index: 1;
     > img {
       width: 32px;
       height: 32px;
@@ -74,7 +82,7 @@
 
   &__summary {
     padding: 36px;
-    background-color: #b5460f54;
+    background-color: colors.$color-primary-33;
     margin-top: 48px;
   }
 

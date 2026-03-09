@@ -1,7 +1,9 @@
-@import url('styles/variables.css');
+@use 'styles/variables';
+@use 'styles/colors';
 .recipes {
   max-width: 1440px;
   margin: 0 auto;
+  padding: 0 variables.$spacing-medium;
   &__body {
     margin: 0 auto;
     margin-top: 36px;
@@ -10,7 +12,6 @@
   &__image {
     width: 100%;
     aspect-ratio: 1440/572;
-    background-color: aliceblue;
   }
   &__header {
     text-align: center;
@@ -24,14 +25,13 @@
 
     &_input {
       flex: 1;
-      max-width: 1154px;
     }
     &_icon {
       display: flex;
       align-items: center;
       justify-content: center;
       height: 52px;
-      background-color: var(--button-primary-bg);
+      background-color: colors.$color-primary;
       width: 64px;
     }
   }

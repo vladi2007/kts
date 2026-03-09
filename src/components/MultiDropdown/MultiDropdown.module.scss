@@ -1,9 +1,12 @@
+@use 'styles/variables';
+@use 'styles/colors';
 .options {
   position: absolute;
   margin-top: 8px;
   left: 0;
   width: 100%;
   z-index: 999;
+  overflow-y: auto;
 }
 
 .option {
@@ -16,7 +19,7 @@
 
   &:hover {
     .optionText {
-      color: var(--text-secondary) !important;
+      color: colors.$color-gray !important;
     }
   }
 }

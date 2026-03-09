@@ -1,19 +1,21 @@
+@use 'styles/variables';
+@use 'styles/colors';
 .wrapper {
   border-radius: 10px;
   &__input-disabled {
-    background-color: #ffffff;
-    color: #e0e0e0;
+    background-color: colors.$color-white;
+    color: colors.$color-gray-disabled;
     cursor: not-allowed;
   }
   &:focus-within {
     box-sizing: border-box;
-    border: 1px solid #b5460f;
+    border: 1px solid colors.$color-primary;
   }
 }
 
 input {
   &::placeholder {
-    color: var(--text-secondary);
+    color: colors.$color-gray;
   }
 }
 
@@ -21,17 +23,18 @@ input {
   border-radius: 1px !important;
   border-radius: 21px;
   outline: none;
-  padding: 0 var(--spacing-m);
-  padding-right: calc(var(--spacing-m) + 20px);
+  padding: 0 variables.$spacing-m;
+  padding-right: calc(variables.$spacing-m + 20px);
   &::placeholder {
-    color: var(--text-secondary);
+    color: colors.$color-gray;
   }
   &:disabled {
-    background-color: #ffffff;
-    color: rgba(175, 173, 181, 1);
+    background-color: colors.$color-white;
+    color: colors.$color-gray;
     opacity: 0.6;
   }
 }
+
 .slot {
   display: flex;
   align-items: center;

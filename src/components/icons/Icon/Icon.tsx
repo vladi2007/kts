@@ -1,5 +1,6 @@
 import * as React from 'react';
-import 'styles/variables.css';
+import { useMemo } from 'react';
+import 'styles/colors.scss';
 
 export type IconProps = React.SVGAttributes<SVGElement> & {
   className?: string;
@@ -16,28 +17,34 @@ const Icon: React.FC<React.PropsWithChildren<IconProps>> = ({
   stroke,
   ...props
 }) => {
-  const getColor = (color?: 'primary' | 'secondary' | 'accent' | 'disabled') => {
-    switch (color) {
-      case 'primary':
-        return 'var(--text-primary)';
-      case 'secondary':
-        return 'var(--text-secondary)';
-      case 'accent':
-        return 'var(--text-accent)';
-      case 'disabled':
-        return '#00000033';
-      default:
-        return 'currentColor';
-    }
-  };
-
+  const getColor = useMemo(
+    () => (color?: 'primary' | 'secondary' | 'accent' | 'disabled') => {
+      switch (color) {
+        case 'primary':
+          return 'var(--color-black)';
+        case 'secondary':
+          return 'var(--color-gray)';
+        case 'accent':
+          return 'var(--color-primary)';
+        case 'disabled':
+          return '#00000033';
+        default:
+          return 'currentColor';
+      }
+    },
+    []
+  );
+  const strokeField = useMemo(
+    () => (stroke === 'none' ? 'none' : getColor(color)),
+    [stroke, getColor, color]
+  );
   return (
     <svg
       className={className}
       width={width}
       height={height}
       fill={getColor(color)}
-      stroke={stroke === 'none' ? 'none' : getColor(color)}
+      stroke={strokeField}
       {...props}
     ></svg>
   );
